@@ -1,7 +1,16 @@
 from datetime import datetime, timedelta
 class rateGeneratorController:
     def __init__(self, entry, exit):
+        self.entry = entry
+        self.exit = exit
         self.rateGenObj = rateGenerator(entry, exit)
+
+
+    def isValid(self):
+        if datetime.strptime(self.entry, '%Y-%m-%d %H:%M:%S.%f') < datetime.strptime(self.exit, '%Y-%m-%d %H:%M:%S.%f'):
+            return True
+        else:
+            return False
 
     def calculatePayment(self):
         if (self.rateGenObj.isElegibleOneHour()):
@@ -120,4 +129,6 @@ class rateGenerator:
         return self.hourlyrate * 3
     
     def calculateDayRate(self):
-        return self.dayrate * (self.diff.days + 1)
+        temp = (self.exit.date() - self.entry.date())
+        temp = temp.days
+        return self.dayrate * (temp + 1)
