@@ -24,4 +24,4 @@ def login():
       return redirect(url_for('success',entry=input1,exit=input2))
 
 if __name__ == '__main__':
-   app.run(debug = True)
+   app.run(host='0.0.0.0')
