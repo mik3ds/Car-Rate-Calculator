@@ -14,19 +14,27 @@ class rateGeneratorController:
 
     def calculatePayment(self):
         if (self.rateGenObj.isElegibleOneHour()):
-            return(dict([('Rate', 'One Hour'),('Price', str(self.rateGenObj.calculateOneHourRate()))]))
-        elif (self.rateGenObj.isElegibleNightRate()):
-            return(dict([('Rate', 'Night Rate'),('Price', str(self.rateGenObj.calculateNightRate()))]))
-        elif (self.rateGenObj.isElegibleTwoHour()):
-            return(dict([('Rate', 'Two Hour'),('Price', str(self.rateGenObj.calculateTwoHourRate()))]))
-        elif (self.rateGenObj.isElegibleWeekendRate()):
-            return(dict([('Rate', 'Weekend Rate'),('Price', str(self.rateGenObj.calculateWeekendRate()))]))
-        elif (self.rateGenObj.isElegibleEarlyBird()):
-            return(dict([('Rate', 'Early Bird'),('Price', str(self.rateGenObj.calculateEarlyBirdRate()))]))
-        elif (self.rateGenObj.isElegibleThreeHour()):
-            return(dict([('Rate', 'Three Hour'),('Price', str(self.rateGenObj.calculateThreeHourRate()))]))
-        else:
-            return(dict([('Rate', 'Day Rate'),('Price', str(self.rateGenObj.calculateDayRate()))]))
+            temp.append(dict([('Rate', 'One Hour'),('Price', str(self.rateGenObj.calculateOneHourRate()))]))
+        if (self.rateGenObj.isElegibleNightRate()):
+            temp.append(dict([('Rate', 'Night Rate'),('Price', str(self.rateGenObj.calculateNightRate()))]))
+        if (self.rateGenObj.isElegibleTwoHour()):
+            temp.append(dict([('Rate', 'Two Hour'),('Price', str(self.rateGenObj.calculateTwoHourRate()))]))
+        if (self.rateGenObj.isElegibleWeekendRate()):
+            temp.append(dict([('Rate', 'Weekend Rate'),('Price', str(self.rateGenObj.calculateWeekendRate()))]))
+        if (self.rateGenObj.isElegibleEarlyBird()):
+            temp.append(dict([('Rate', 'Early Bird'),('Price', str(self.rateGenObj.calculateEarlyBirdRate()))]))
+        if (self.rateGenObj.isElegibleThreeHour()):
+            temp.append(dict([('Rate', 'Three Hour'),('Price', str(self.rateGenObj.calculateThreeHourRate()))]))
+        payment = (dict([('Rate', 'Day Rate'),('Price', str(self.rateGenObj.calculateDayRate()))]))
+        
+        for i in temp:
+            if int(i.get("Price","")) < payment.get("Price",""):
+                payment = i
+                
+        return payment
+
+
+
 
 class rateGenerator:
     def __init__(self, entry, exit):
