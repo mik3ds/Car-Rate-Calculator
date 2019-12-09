@@ -14,19 +14,19 @@ class rateGeneratorController:
 
     def calculatePayment(self):
         if (self.rateGenObj.isElegibleOneHour()):
-            return('One Hour ' + str(self.rateGenObj.calculateOneHourRate()))
+            return(dict([('Rate', 'One Hour'),('Price', str(self.rateGenObj.calculateOneHourRate()))]))
         elif (self.rateGenObj.isElegibleNightRate()):
-            return('Night Rate ' + str(self.rateGenObj.calculateNightRate()))
+            return(dict([('Rate', 'Night Rate'),('Price', str(self.rateGenObj.calculateNightRate()))]))
         elif (self.rateGenObj.isElegibleTwoHour()):
-            return('Two Hour ' + rateGenObj.calculateTwoHourRate())
+            return(dict([('Rate', 'Two Hour'),('Price', str(self.rateGenObj.calculateTwoHourRate()))]))
         elif (self.rateGenObj.isElegibleWeekendRate()):
-            return('Weekend Rate' + str(self.rateGenObj.calculateWeekendRate()))
+            return(dict([('Rate', 'Weekend Rate'),('Price', str(self.rateGenObj.calculateWeekendRate()))]))
         elif (self.rateGenObj.isElegibleEarlyBird()):
-            return('Early Bird ' + str(self.rateGenObj.calculateEarlyBird()))
+            return(dict([('Rate', 'Early Bird'),('Price', str(self.rateGenObj.calculateEarlyBirdRate()))]))
         elif (self.rateGenObj.isElegibleThreeHour()):
-            return('Three Hour ' + str(self.rateGenObj.calculateThreeHourRate()))
+            return(dict([('Rate', 'Three Hour'),('Price', str(self.rateGenObj.calculateThreeHourRate()))]))
         else:
-            return('Day Rate ' + str(self.rateGenObj.calculateDayRate()))
+            return(dict([('Rate', 'Day Rate'),('Price', str(self.rateGenObj.calculateDayRate()))]))
 
 class rateGenerator:
     def __init__(self, entry, exit):
@@ -116,7 +116,7 @@ class rateGenerator:
         else:
             return False
         
-    def calculateEarlyBird(self):
+    def calculateEarlyBirdRate(self):
         return self.earlybirdrate
     
     def isElegibleThreeHour(self):
